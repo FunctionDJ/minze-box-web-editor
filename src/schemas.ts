@@ -45,25 +45,31 @@ export const boxConfigSchema = z
     /**
      * behaviour for opposing directional inputs.
      * 0: neutral/CPT standard (directions cancel out to neutral)
-     * 1: 2IP (new direction overwrites previous, but releasing may return to neutral)
+     * 1: 2IP [NOT IMPLEMENTED!!!] (new direction overwrites previous, but releasing may return to neutral)
      * 2: 2IPR (new direction overwrites previous, releasing will go back to previous input (busted!))
      */
     socdMode: z.literal(0).or(z.literal(1)).or(z.literal(2)),
+    /** MinZe: makes it so that the modifiers act as dpad and you have to press the switch button to activate the modifiers (this is for non-smash games tbh) */
     switchForDirections: z.boolean(),
     /** outputs analog values which is required for ultimate */
-    analogShields: true,
+    analogShields: z.boolean(),
     /** L/R values for when analogShields is true */
-    rValue: 9,
-    lValue: 87,
+    rValue: z.int(),
+    lValue: z.int(),
   })
-  .refine(
-    (val) => val.combination.split(",").length === val.combinationArraySize
-  );
+  .refine((config) => {
+    // when .split(",") is used on empty string, length would be 1
+    // this explicit emptry string check works around that.
+    const combinationSize =
+      config.combination === "" ? 0 : config.combination.split(",").length;
+
+    return combinationSize === config.combinationArraySize;
+  });
 
 export type BoxConfig = z.infer<typeof boxConfigSchema>;
-type FilterOnPins<U> = U extends `pin${infer A}` ? A : never;
-export type ActionKeys = FilterOnPins<keyof BoxConfig>;
 
 export const boxConfigFileSchema = z.object({
   configurations: z.array(boxConfigSchema),
 });
+
+export type BoxConfigFile = z.infer<typeof boxConfigFileSchema>;

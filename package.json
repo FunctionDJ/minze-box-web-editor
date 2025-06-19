@@ -11,9 +11,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.10",
-    "zod": "^3.25.67"
-  },
-  "devDependencies": {
+    "zod": "^3.25.67",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",

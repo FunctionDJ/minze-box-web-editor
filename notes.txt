@@ -1,0 +1,5 @@
+improvement ideas:
+- config <select> dropdown
+- search for config
+- check for activation combination conflicts
+- explain / visualize tiltValue, x1/y2... values, l/rValue
