@@ -45,6 +45,7 @@ export const EditPinDialog = ({
 
   return (
     <dialog
+      // @ts-ignore
       closedby="any"
       ref={dialogRef}
       className="m-auto z-50 rounded backdrop:bg-black backdrop:opacity-50 bg-gray-800 border-1 border-gray-600 overflow-hidden"
