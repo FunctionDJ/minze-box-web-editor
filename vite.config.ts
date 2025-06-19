@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  base: "/<REPO>/",
+  base: "minze-box-web-editor",
   plugins: [react(), tailwindcss()],
   server: {
     host: true,
